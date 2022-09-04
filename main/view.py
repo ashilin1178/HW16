@@ -32,7 +32,7 @@ def view_orders():
     if request.method == "GET":
         result = get_all_orders()
 
-        return jsonify(result)
+        return result
     elif request.method == "POST":
         new_order = request.json
         order = Order(**new_order)
@@ -89,7 +89,7 @@ def view_user(id):
     elif request.method == "DELETE":
         user = User.query.get(id)
         db.session.delete(user)
-
+        db.session.commit()
         return "", 204
 
 
@@ -125,7 +125,7 @@ def view_order(id):
     elif request.method == "DELETE":
         order = Order.query.get(id)
         db.session.delete(order)
-
+        db.session.commit()
         return "", 204
 
 
@@ -155,5 +155,5 @@ def view_offer(id):
     elif request.method == "DELETE":
         offer = Offer.query.get(id)
         db.session.delete(offer)
-
+        db.session.commit()
         return "", 204
